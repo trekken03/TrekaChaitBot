@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <title>TrekaChaiBot</title>
+    <title>TrekaChaitBot</title>
+    <link rel="icon" type="image/jpg" href="bunny.jpg">
     <link rel="stylesheet" href="chatbot.css">
 </head>
 
@@ -20,7 +21,7 @@
             { keywords: ['anniversary', 'when', 'first chat'], response: 'Syempre March 30, 2025! at exactly 7:43 pm, Bat makakalimutan eh kinilig pantog ko non!' },
             { keywords: ['how much do you love me?', 'so much'], response: 'I think i love you too much baby!, my love for you cannot be shaken! wow shaken?, then to infinity and beyond!' },
             { keywords: ['love me', 'do you love'], response: 'Of course baby! I love you sososo much yk?' },
-            { keywords: ['favorite moment','Your favorite memory', 'best memory'], response: 'Picking a best memory with u is quite hard yk bab? theres too many of them kasi eh!' },
+            { keywords: ['favorite moment', 'Your favorite memory', 'best memory'], response: 'Picking a best memory with u is quite hard yk bab? theres too many of them kasi eh!' },
             { keywords: ['what makes', 'special about'], response: 'Your one of a kind eyes, Your sweetest smile, Your kindness that makes you special, and that incredible laugh of yours that makes my day just by hearing it.' },
             { keywords: ['miss me'], response: 'I miss you baby! Can\'t wait to smell you and that kilikili of yours! hehe😉' },
             { keywords: ['sorry', 'apologize'], response: 'What\'s with the sorry? sybau(beautiful ass) beh' },
@@ -37,7 +38,7 @@
             { keywords: ['whatsuppp', 'whats up'], response: 'whatsup whatsup whatsuppppppppppppp' },
             { keywords: ['sino mas maganda', 'ex', 'sino pinaka mahal mo', 'iiwan', 'leave', 'gastos'], response: 'sybau beh' },
             { keywords: ['why did you made this', 'why chatbot', 'this chatbot'], response: 'i made it simple baby! becuase i dont have money yet to give you anything to our suppossedly anniversary, i wanna do something for you tho its a bit simple now, beh ilang oras k lang sya ginawa TT it might have a lot of flaws to it baby but its made by love💖' },
-            { keywords: ['message for me?', 'do you have anything to say to me?', 'message?'], response: 'OF COURSE!!! It’s been a year knowing you, baby, and I couldn’t be any happier. I couldnt ask for more, Everyday with you feels like a blessing, and im so grateful for all the love, laughter, and memories weve shared. You really made me the happiest baby! and im not joking about that. You made my life brighter just being loved by you. Cheers to us and to the rest of our lives were going to spend. Im not gonna make it long baby hehe. Im always going to be your number 1 fan! I love you more than anything! 💖' },
+            { keywords: ['message for me?', 'do you have anything to say to me?', 'message?'], response: 'OF COURSE!!! It\'s been a year knowing you, baby, and I couldn\'t be any happier. I couldnt ask for more, Everyday with you feels like a blessing, and im so grateful for all the love, laughter, and memories weve shared. You really made me the happiest baby! and im not joking about that. You made my life brighter just being loved by you. Cheers to us and to the rest of our lives were going to spend. Im not gonna make it long baby hehe. Im always going to be your number 1 fan! I love you more than anything! 💖' },
         ];
 
         class AnniversaryChatbot {
@@ -58,7 +59,7 @@
                 return `Hmm, I didn't understand that baby. But here's what I know about:\n\n` +
                     `- Our first chat\n` +
                     `- Do you love me?\n` +
-                    `- Your favorite memory\n` +                
+                    `- Your favorite memory\n` +
                     `- What makes me special?\n` +
                     `- Do you miss me?\n` +
                     `- Games we played together\n` +
@@ -133,25 +134,23 @@
             );
         }
 
-        function ChatInput({ chatMessages, setChatMessages, isLoading }) {
+        function ChatInput({ chatMessages, setChatMessages, isLoading, onFirstMessage }) {
             const [inputText, setInputText] = useState('');
 
-            // Helper function to delay
             const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-            // Async function to send message
             const sendMessage = async () => {
                 if (!inputText.trim() || isLoading) return;
 
+                onFirstMessage();
+
                 const userMessage = inputText;
 
-                // Add user message
                 const newMessages = [
                     ...chatMessages,
                     { message: userMessage, sender: 'user', id: Date.now(), isLoading: false }
                 ];
 
-                // Add loading message
                 const loadingId = Date.now() + 1;
                 newMessages.push({
                     message: '',
@@ -163,13 +162,10 @@
                 setChatMessages(newMessages);
                 setInputText('');
 
-                // Wait for 800ms
                 await delay(800);
 
-                // Get response
                 const response = AnniversaryChatbot.getResponse(userMessage);
 
-                // Update messages with actual response
                 setChatMessages(prev =>
                     prev.map(msg =>
                         msg.id === loadingId
@@ -211,13 +207,42 @@
                 { message: 'Happy 1 Year of being together baby! ask me a question!', sender: 'robot', id: 1, isLoading: false }
             ]);
 
+            const audioRef = useRef(null);
+            const musicStarted = useRef(false);
+            const [isMuted, setIsMuted] = useState(false);
+
+            const startMusic = () => {
+                if (!musicStarted.current && audioRef.current) {
+                    audioRef.current.play();
+                    musicStarted.current = true;
+                }
+            };
+
+            const toggleMute = () => {
+                if (audioRef.current) {
+                    audioRef.current.muted = !isMuted;
+                    setIsMuted(!isMuted);
+                }
+            };
+
             const isLoading = chatMessages.some(msg => msg.isLoading);
 
             return (
                 <div className="app-container">
+                    <audio ref={audioRef} loop src="song.mp3" />
+
                     <h1 className="app-title">TrekaChaitBot</h1>
+
+
+
+
                     <ChatMessages chatMessages={chatMessages} />
-                    <ChatInput chatMessages={chatMessages} setChatMessages={setChatMessages} isLoading={isLoading} />
+                    <ChatInput
+                        chatMessages={chatMessages}
+                        setChatMessages={setChatMessages}
+                        isLoading={isLoading}
+                        onFirstMessage={startMusic}
+                    />
                 </div>
             );
         }
