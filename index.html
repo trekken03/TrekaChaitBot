@@ -17,18 +17,18 @@
         const { useState, useRef, useEffect } = React;
 
         const ANNIVERSARY_KNOWLEDGE_BASE = [
-            { keywords: ['anniversary', 'when', 'first chat'], response: 'Syempre March 30, 2025! Bat makakalimutan eh kinilig pantog ko non!' },
+            { keywords: ['anniversary', 'when', 'first chat'], response: 'Syempre March 30, 2025! at exactly 7:43 pm, Bat makakalimutan eh kinilig pantog ko non!' },
+            { keywords: ['how much do you love me?', 'so much'], response: 'I think i love you too much baby!, my love for you cannot be shaken! wow shaken?, then to infinity and beyond!' },
             { keywords: ['love me', 'do you love'], response: 'Of course baby! I love you sososo much yk?' },
             { keywords: ['favorite moment', 'best memory'], response: 'Picking a best memory with u is quite hard yk bab? theres too many of them kasi eh!' },
             { keywords: ['what makes', 'special about'], response: 'Your one of a kind eyes, Your sweetest smile, Your kindness that makes you special, and that incredible laugh of yours that makes my day just by hearing it.' },
-            { keywords: ['miss you'], response: 'I miss you more baby! Can\'t wait to smell you and that kilikili of yours! hehe😉' },
+            { keywords: ['miss me'], response: 'I miss you baby! Can\'t wait to smell you and that kilikili of yours! hehe😉' },
             { keywords: ['sorry', 'apologize'], response: 'What\'s with the sorry? sybau(beautiful ass) beh' },
             { keywords: ['do i make you happy?', 'are you happy?'], response: 'YES! You made me the happiest baby! And i am really really thankful for you!.' },
             { keywords: ['why me', 'reason love'], response: 'AHHH this again! okay! Because you\'re kind, beautiful inside and out, you make me laugh, and you make me want to be a better person. legitness.' },
             { keywords: ['celebrate', 'anniversary plans'], response: 'I\'m sorry baby if i can\'t take you out on a date yet and ik yk why huhu but im sure in the future i can make bawi bawi hehe ily bab!' },
             { keywords: ['codm', 'played', 'games'], response: 'we played a lot of games in our first year baby!,but i must say na playing codm with you hits different! imagine playing 510+ games with you and i enjoyed all of them!' },
             { keywords: ['trust me?', 'believe us'], response: 'I trust you completely baby! And I absolutely believe in us!' },
-            { keywords: ['how much do you love me?', 'so much'], response: 'I think i love you too much baby!, my love foy you cannot be shaken! wow shaken?, then to infinity and beyond!' },
             { keywords: ['hey', 'hi'], response: 'HAIYAAAA BABYYY!' },
             { keywords: ['hello'], response: 'HELLUUU BABYYY! WHATSAPPP' },
             { keywords: ['thank you', 'thanks'], response: 'NO! Thank you for being the most amazing baby! I\'m always grateful for you! every single day!.' },
@@ -56,22 +56,19 @@
 
             static getHelpMessage() {
                 return `Hmm, I didn't understand that baby. But here's what I know about:\n\n` +
-                    `- Our anniversary date\n` +
-                    `- If I love you\n` +
-                    `- My favorite memories\n` +
-                    `- Our future together\n` +
-                    `- What makes you special\n` +
-                    `- Missing you\n` +
-                    `- Why I love you\n` +
-                    `- Celebrating our anniversary\n` +
+                    `- Our first chat\n` +
+                    `- If i love you\n` +
+                    `- Your favorite memory\n` +                
+                    `- What makes me special?\n` +
+                    `- Do you miss me?\n` +
                     `- Games we played together\n` +
-                    `- Trust and belief in us\n` +
-                    `- How much I love you\n` +
+                    `- Do you trust me?\n` +
+                    `- How much do you love me?\n` +
                     `- Greetings (hi, hello, hey)\n` +
-                    `- Thanks and gratitude\n` +
-                    `- How beautiful you are\n` +
-                    `- Being proud of you\n` +
-                    `- Making me happy\n` +
+                    `- Thankyou baby\n` +
+                    `- Maganda ba ako?\n` +
+                    `- Are you proud of me?\n` +
+                    `- Do i make you happy?\n` +
                     `- Why chatbot\n` +
                     `- Message for you\n` +
                     `Try asking me about any of these!`;
